@@ -8,15 +8,11 @@ with st.sidebar:
     selected = option_menu("Main Menu", ["Home", 'Information','Marketing Calculation','Sale Calculation'], 
         icons=['house', 'link', 'file-text','rocket'], menu_icon="cast", default_index=0)
 
-
-
-
-
 if selected == "Marketing Calculation":
     st.header("Marketing Calculation")
     option = st.selectbox(
         "Select the marketing metric to calculate:",
-        ("Conversion Rate (CR)", "Click Through Rate (CTR)", "Cost Per Click (CPC)","Cost per Action (CPA)","Cost per lead (CPL)")
+        ("Conversion Rate (CR)", "Click Through Rate (CTR)", "Cost Per Click (CPC)","Cost per Action (CPA)","Cost per Lead (CPL)","Customer Acquisition Cost (CAC)")
     )
 
     # Display the selected option
@@ -72,6 +68,7 @@ if selected == "Marketing Calculation":
                 st.write(f'Cost Per Click: {cost_per_click:.2f}')
             else:
                 st.write('Please enter a valid number of total cost and clicks.')
+
     elif option == "Cost per Action (CPA)":
         st.subheader("Cost per Action (CPA)")
         st.write(""""Cost per Action (CPA) is a digital marketing metric that measures the cost associated with a specific action taken by a user as a result of an advertisement"\n
@@ -80,27 +77,42 @@ if selected == "Marketing Calculation":
         # Input fields for total cost and total number of clicks
         total_Actions = st.number_input('Enter the total Actions:', min_value=0)
         total_cost = st.number_input('Enter the total Cost:', min_value=0)
-        
         # Button to calculate cost per click
-        if st.button('Calculate Cost Per Action (CAP)'):
+        if st.button('Calculate Cost Per Action (CPA)'):
             if total_Actions > 0:
                 cost_per_Action = (total_cost / total_Actions)
                 st.write(f'Cost Per Action: {cost_per_Action:.2f}')
             else:
                 st.write('Please enter a valid number of total cost and Actions.')
-    elif option == "Cost per lead (CPL)":
-        st.subheader("Cost per lead (CPL) ")
-        st.write(""""Cost per lead (CPL) is a metric used in marketing and advertising to measure the cost-effectiveness of a campaign in generating leads. It's calculated by dividing the total cost of the campaign by the number of leads generated."\n
+
+    elif option == "Cost per Lead (CPL)":
+        st.subheader("Cost Per Lead (CPL)")
+        st.write(""""Cost per lead (CPL) is a metric used in marketing and advertising to measure the cost-effectiveness of a campaign in generating leads. It's calculated by dividing the total cost of the campaign by the number of leads generated"\n
         CPL = Total Campaign Cost / Number of Leads Generated""")
 
         # Input fields for total cost and total number of clicks
-        total_campaign_cost = st.number_input('Enter the Total_Campaing_Cost:', min_value=0)
+        Total_Campaign_Cost = st.number_input('Enter the Total_Campaing_Cost:', min_value=0)
         Number_of_Leads_Generated = st.number_input('Enter the Number_of_Leads_Generated:', min_value=0)
-        
         # Button to calculate cost per click
-        if st.button('Calculate Cost Per Action (CAP)'):
-            if total_campaign_cost > 0:
-                cost_per_Lead = (total_campaign_cost / Number_of_Leads_Generated)
-                st.write(f'Cost Per Lead: {cost_per_Lead:.2f}')
+        if st.button('Calculate Cost Per Lead (CPL)'):
+            if Total_Campaign_Cost > 0:
+                Cost_Per_Lead = (Total_Campaign_Cost / Number_of_Leads_Generated)
+                st.write(f'Cost Per Lead: {Cost_Per_Lead:.2f}')
             else:
                 st.write('Please enter a valid number of total campaign Cost and Leads.')
+
+    elif option == "Customer Acquisition Cost (CAC)":
+        st.subheader("Customer Acquisition Cost (CAC)")
+        st.write(""""Customer Acquisition Cost (CAC) is a metric that measures the cost associated with acquiring a new customer. It is a crucial indicator for businesses to understand the efficiency of their marketing and sales efforts"\n
+        CAC = Number of New Customers Acquired/Total Sales and Marketing Expenses""")
+
+        # Input fields for total cost and total number of clicks
+        New_Customers_Acquired = st.number_input('Enter the Number of New Customers Acquired:', min_value=0)
+        Total_Sales_and_Marketing_Expenses = st.number_input('Enter the Total Sales and Marketing Expenses:', min_value=0)
+        # Button to calculate cost per click
+        if st.button('Customer Acquisition Cost (CAC)'):
+            if New_Customers_Acquired > 0:
+                Customer_Acquisition_Cost = (New_Customers_Acquired / Total_Sales_and_Marketing_Expenses)
+                st.write(f'Cost Per Lead: {Customer_Acquisition_Cost:.2f}')
+            else:
+                st.write('Please enter a valid number New Customers Auquired and Sales,Mareketing Expenses.')
