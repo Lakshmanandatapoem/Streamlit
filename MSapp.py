@@ -9,10 +9,10 @@ with st.sidebar:
         icons=['house', 'link', 'file-text','rocket'], menu_icon="cast", default_index=0)
 
 if selected == "Marketing Calculation":
-    st.header("Marketing Calculation")
+    #st.header("Marketing Calculation")
     option = st.selectbox(
         "Select the marketing metric to calculate:",
-        ("Conversion Rate (CR)", "Click Through Rate (CTR)", "Cost Per Click (CPC)","Cost per Action (CPA)","Cost per Lead (CPL)","Customer Acquisition Cost (CAC)")
+        ("Conversion Rate (CR)", "Click Through Rate (CTR)", "Cost Per Click (CPC)","Cost per Action (CPA)","Cost per Lead (CPL)","Customer Acquisition Cost (CAC)","Abandon Rate(AR)","Return on Ad Spend")
     )
 
     # Display the selected option
@@ -116,3 +116,34 @@ if selected == "Marketing Calculation":
                 st.write(f'Cost Per Lead: {Customer_Acquisition_Cost:.2f}')
             else:
                 st.write('Please enter a valid number New Customers Auquired and Sales,Mareketing Expenses.')
+    elif option == "Abandon Rate(AR)":
+        st.subheader("Abandon Rate(AR)")
+        st.write(""""Abandon rate is a metric commonly used in customer service and call center environments to measure the percentage of calls or customer interactions that are terminated by the customer before reaching a service representative or being resolved. It is an important indicator of customer satisfaction and operational efficiency. A high abandon rate can indicate issues such as long wait times, inadequate staffing, or poor call handling procedures."\n
+        Abandon_Rate (%)=(Number_of_Abandoned_Calls/Total_Number_of_Incoming_Calls)×100""")
+
+        # Input fields for total cost and total number of clicks
+        Number_of_Abandoned_Calls = st.number_input('Enter the Number of Abandoned Calls:', min_value=0)
+        Total_Number_of_Incoming_Calls = st.number_input('Enter the Number of Total Number of Incoming Calls:', min_value=0)
+        # Button to calculate cost per click
+        if st.button('Abandon Rate(AR)'):
+            if Total_Number_of_Incoming_Calls > 0:
+                Customer_Acquisition_Cost = (Number_of_Abandoned_Calls/Total_Number_of_Incoming_Calls )
+                st.write(f'Abandon_Rate: {Customer_Acquisition_Cost:.2f}')
+            else:
+                st.write('Please enter a valid Total Number of Incoming Calls, Number of Abandoned Calls.')
+    elif option == "Return on Ad Spend":
+        st.subheader("Return on Ad Spend")
+        st.write(""""Return on Ad Spend (ROAS) is a marketing metric that measures the revenue generated for every dollar spent on advertising. It helps businesses evaluate the effectiveness of their advertising campaigns. A higher ROAS indicates that a campaign is generating more revenue per dollar spent, while a lower ROAS suggests the opposite."\n
+        ROAS = Cost_of_Ads/Revenue_from_Ads""")
+
+        # Input fields for total cost and total number of clicks
+        Cost_of_Ads = st.number_input('Enter the Number of Cost of Ads:', min_value=0)
+        Revenue_from_Ads = st.number_input('Enter the Number of Revenue from Ads:', min_value=0)
+        # Button to calculate cost per click
+        if st.button('Return on Ad Spend'):
+            if Cost_of_Ads > 0:
+                ROAS = (Revenue_from_Ads/Cost_of_Ads )
+                st.write(f'Abandon_Rate: {ROAS:.2f}')
+            else:
+                st.write('Please enter a cost of Ads, Revenue from ads.')
+    
