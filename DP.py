@@ -76,14 +76,8 @@ elif selected == "Paid Media":
             icons=['filter','link', 'file-text', 'lightning','rocket','shield'], menu_icon="cast", default_index=0)
     
     #1. Data Filtering:    
-    if selected == "Data Filtering":
-        st.subheader("Data Filtering")
-        uploaded_file = st.file_uploader("Upload a Python Script", type=["py"])
-        if uploaded_file is not None:
-            file_path = save_uploaded_file(uploaded_file)
-            if st.button('Run Script'):
-                run_script(file_path)
-
+    
+    #2. Data Cleaning:
     if selected == 'Data Cleaning':
         st.subheader("Data Cleaning Process")
         uploaded_files = st.file_uploader("Upload your excel file(s) for data cleaning process", type=["xlsx"], accept_multiple_files=True)
