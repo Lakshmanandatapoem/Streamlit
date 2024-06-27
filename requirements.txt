@@ -1,3 +1,11 @@
 streamlit
 streamlit-option-menu
 openpyxl
+pandas
+oi
+os
+sys
+subprocess
+sys
+json
+BytesIO
