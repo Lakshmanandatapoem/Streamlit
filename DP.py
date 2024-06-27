@@ -70,62 +70,7 @@ if selected == "Home":
             else:
                 st.error("Login failed. Please check your username and password.")    
 elif selected == "Paid Media":
-        # Function to initialize session state
-    def initialize_session_state():
-        if 'modified_files' not in st.session_state:
-            st.session_state.modified_files = {}
-
-    # Function to save uploaded file
-    def save_uploaded_file(uploaded_file):
-        if not os.path.exists("tempDir"):
-            os.makedirs("tempDir")
-        file_path = os.path.join("tempDir", uploaded_file.name)
-        with open(file_path, "wb") as f:
-            f.write(uploaded_file.getbuffer())
-        return file_path
     
-    # Function to run the Python script
-    def run_script(script_path):
-        try:
-            result = subprocess.run(['python', script_path], capture_output=True, text=True)
-            if result.returncode == 0:
-                st.success("Script ran successfully!")
-                st.text(result.stdout)
-            else:
-                st.error("Error running the script.")
-                st.error(result.stderr)
-        except Exception as e:
-            st.error(f"An error occurred: {e}")
-    
-    # Streamlit app
-    st.title("Python Script Runner")
-    
-    uploaded_file = st.file_uploader("Upload your Python script", type=["py"])
-    
-    if uploaded_file is not None:
-        script_path = save_uploaded_file(uploaded_file)
-        st.success(f"File saved successfully: {script_path}")
-        
-        if st.button("Run Script"):
-            run_script(script_path)
-
-    # Function to download Excel file
-    def download_xlsx(df, label, filename):
-        excel_file = io.BytesIO()
-        df.to_excel(excel_file, index=False)
-        excel_file.seek(0)
-        st.download_button(label=label, data=excel_file, file_name=filename, mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-
-    # Function to download Excel file
-    def download_csv(df, label, filename):
-        csv_file = io.BytesIO()
-        df.to_excel(csv_file, index=False)
-        csv_file.seek(0)
-        st.download_button(label=label, data=csv_file, file_name=filename, mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-
-    # Initialize session state
-    initialize_session_state()
-
     with st.sidebar:
         selected = option_menu("Main Menu", ['Data Filtering','Data Cleaning','Null Value Check','Summary','Datapoem Format'],#'Data Quality Check'], 
             icons=['filter','link', 'file-text', 'lightning','rocket','shield'], menu_icon="cast", default_index=0)
