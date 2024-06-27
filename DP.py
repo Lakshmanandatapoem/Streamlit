@@ -77,10 +77,13 @@ elif selected == "Paid Media":
 
     # Function to save uploaded file
     def save_uploaded_file(uploaded_file):
-        with open(os.path.join("tempDir", uploaded_file.name), "wb") as f:
+        if not os.path.exists("tempDir"):
+            os.makedirs("tempDir")
+        file_path = os.path.join("tempDir", uploaded_file.name)
+        with open(file_path, "wb") as f:
             f.write(uploaded_file.getbuffer())
-        return os.path.join("tempDir", uploaded_file.name)
-
+        return file_path
+    
     # Function to run the Python script
     def run_script(script_path):
         try:
@@ -93,10 +96,18 @@ elif selected == "Paid Media":
                 st.error(result.stderr)
         except Exception as e:
             st.error(f"An error occurred: {e}")
-
-    # Create a directory to save uploaded files
-    if not os.path.exists("tempDir"):
-        os.makedirs("tempDir")
+    
+    # Streamlit app
+    st.title("Python Script Runner")
+    
+    uploaded_file = st.file_uploader("Upload your Python script", type=["py"])
+    
+    if uploaded_file is not None:
+        script_path = save_uploaded_file(uploaded_file)
+        st.success(f"File saved successfully: {script_path}")
+        
+        if st.button("Run Script"):
+            run_script(script_path)
 
     # Function to download Excel file
     def download_xlsx(df, label, filename):
